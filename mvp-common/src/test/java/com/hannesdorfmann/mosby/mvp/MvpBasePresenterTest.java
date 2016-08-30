@@ -1,38 +1,78 @@
 package com.hannesdorfmann.mosby.mvp;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * @author Hannes Dorfmann
  */
-public class MvpBasePresenterTest extends MvpBasePresenter<MvpView> {
+public class MvpBasePresenterTest {
 
   @Test
-  public void testOnDestroy(){
+  public void testAttachView() {
+    MvpBasePresenter<MvpView> presenter = new MvpBasePresenter<>();
+    MvpView mvpView = new MvpView() {
+    };
+
+    assertFalse(presenter.isViewAttached());
+    presenter.attachView(mvpView);
+    assertTrue(presenter.isViewAttached());
+  }
+
+  @Test
+  public void testDetachView() {
+    MvpBasePresenter<MvpView> presenter = new MvpBasePresenter<>();
+    MvpView mvpView = new MvpView() {
+    };
+
+    presenter.attachView(mvpView);
+    presenter.detachView(false);
+    assertViewNotAttachedAndNull(presenter);
+  }
+
+  @Test
+  public void testGetView() {
+    MvpBasePresenter<MvpView> presenter = new MvpBasePresenter<>();
+    MvpView mvpView = new MvpView() {
+    };
+
+    assertNull(presenter.getView());
+    presenter.attachView(mvpView);
+    assertNotNull(presenter.getView());
+  }
+
+  @Test
+  public void testOnDestroy() {
+    MvpBasePresenter<MvpView> presenter = new MvpBasePresenter<>();
     MvpView view = new MvpView() {
     };
 
-    noViewAttached();
+    assertViewNotAttachedAndNull(presenter);
+    presenter.attachView(view);
 
-    attachView(view);
+    assertViewAttachedAndNotNull(presenter);
+    assertEquals(presenter.getView(), view);
 
-    Assert.assertTrue(isViewAttached());
-    Assert.assertNotNull(getView());
-    Assert.assertEquals(getView(), view);
+    presenter.detachView(true);
+    assertViewNotAttachedAndNull(presenter);
 
-    detachView(true);
-    noViewAttached();
-
-
-    attachView(view);
-    detachView(false);
-    noViewAttached();
-
+    presenter.attachView(view);
+    presenter.detachView(false);
+    assertViewNotAttachedAndNull(presenter);
   }
 
+  private void assertViewAttachedAndNotNull(final MvpBasePresenter presenter) {
+    assertTrue(presenter.isViewAttached());
+    assertNotNull(presenter.getView());
+  }
 
-  private void noViewAttached(){
-    Assert.assertFalse(isViewAttached());
+  private void assertViewNotAttachedAndNull(final MvpBasePresenter presenter) {
+    assertFalse(presenter.isViewAttached());
+    assertNull(presenter.getView());
   }
 }

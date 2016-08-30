@@ -27,11 +27,11 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * Activities that you want to support mosby's mvp.
  *
  * @author Hannes Dorfmann
- * @see BaseMvpDelegateCallback
+ * @see MvpDelegateCallback
  * @since 2.0.0
  */
 public interface ActivityMvpDelegateCallback<V extends MvpView, P extends MvpPresenter<V>>
-    extends BaseMvpDelegateCallback<V, P> {
+    extends MvpDelegateCallback<V, P> {
 
   /**
    * Return any Object holding the desired state to propagate to the next activity instance. Please
@@ -46,12 +46,12 @@ public interface ActivityMvpDelegateCallback<V extends MvpView, P extends MvpPre
    *
    * @return Object holding state.
    */
-  Object onRetainNonMosbyCustomNonConfigurationInstance();
+  public Object onRetainNonMosbyCustomNonConfigurationInstance();
 
   /**
    * @return Return the value previously returned from {@link FragmentActivity#onRetainCustomNonConfigurationInstance()}.
    */
-  Object getLastCustomNonConfigurationInstance();
+  public Object getLastCustomNonConfigurationInstance();
 
   /**
    * This method should invoke {@link
@@ -63,5 +63,5 @@ public interface ActivityMvpDelegateCallback<V extends MvpView, P extends MvpPre
    * method since this method is the counterpart to {@link #onRetainNonMosbyCustomNonConfigurationInstance()}
    * </p>
    */
-  Object getNonMosbyLastCustomNonConfigurationInstance();
+  public Object getNonMosbyLastCustomNonConfigurationInstance();
 }
