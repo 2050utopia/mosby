@@ -1,17 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-  ext.kotlinVersion = '1.0.1'
+  ext.kotlinVersion = '1.0.5'
 
   repositories {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.1.0'
+    classpath 'com.android.tools.build:gradle:2.2.2'
     classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
-    classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.2'
+  //  classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.2'
   }
 }
 
@@ -35,17 +35,17 @@ allprojects {
 
 ext {
   minSdk = 14
-  targetSdk = 23
-  buildToolsVersion = '23.0.1'
-  compileSdkVersion = 23
+  targetSdk = 25
+  buildToolsVersion = '25.0.1'
+  compileSdkVersion = 25
 
   javaSourceCompatibility = JavaVersion.VERSION_1_7
   javaTargetCompatibility = JavaVersion.VERSION_1_7
 
   // Libraries
-  appcompat7Version = '23.1.1'
-  supportAnnotations = '23.1.1'
-  recyclerviewVersion = '23.1.1'
+  appcompat7Version = '25.0.0'
+  supportAnnotations = '25.0.0'
+  recyclerviewVersion = '25.0.0'
 
   // Libraries for samples
   fragmentargsVersion = '2.1.0'
@@ -62,7 +62,7 @@ ext {
 
 
   // Test Libs
-  robolectricVersion = '3.0'
+  robolectricVersion = '3.1.4'
   junitVersion = '4.12'
   mockitoVersion = '2.0.5-beta'
   powermockVersion = '1.6.2'
